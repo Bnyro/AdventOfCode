@@ -2,11 +2,10 @@ use crate::util::read_file;
 
 pub fn solve() -> String {
     let file = read_file(2);
-    let battles: Vec<&str> = file.lines().collect();
     let mut score: i32 = 0;
-    for i in 0..battles.len() {
-        let opponent_shape = battles[i].chars().nth(0).unwrap().to_string();
-        let own_shape = battles[i].chars().nth(2).unwrap().to_string();
+    for battle in file.lines() {
+        let opponent_shape = battle.chars().nth(0).unwrap().to_string();
+        let own_shape = battle.chars().nth(2).unwrap().to_string();
         let value = match own_shape.as_str() {
             "X" => 1,
             "Y" => 2,
