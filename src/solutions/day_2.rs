@@ -1,6 +1,6 @@
 use crate::util::read_file;
 
-pub fn solve() -> String {
+pub fn part_one() -> String {
     let file = read_file(2);
     let mut score: i32 = 0;
     for battle in file.lines() {

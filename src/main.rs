@@ -2,6 +2,7 @@ pub mod solutions;
 pub mod util;
 
 fn main() {
-    println!("1: {}", solutions::day_1::solve());
-    println!("2: {}", solutions::day_2::solve());
+    println!("1) 1: {}", solutions::day_1::part_one());
+    println!("1) 2: {}", solutions::day_1::part_two());
+    println!("2) 1: {}", solutions::day_2::part_one());
 }
