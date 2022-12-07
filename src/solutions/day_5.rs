@@ -1,6 +1,14 @@
 use crate::util::read_file;
 
 pub fn part_one() -> String {
+    solve(false)
+}
+
+pub fn part_two() -> String {
+    solve(true)
+}
+
+fn solve(retain_order: bool) -> String {
     let content = read_file(5);
     let parts = content.split("\n\n").collect::<Vec<&str>>();
 
@@ -40,8 +48,14 @@ pub fn part_one() -> String {
             .map(|c| c.to_string().parse::<usize>().unwrap());
         let from = nums.clone().rev().take(2).collect::<Vec<usize>>()[1] - 1;
         let to = nums.rev().take(1).collect::<Vec<usize>>()[0] - 1;
+
         let copy = stacks[from].clone();
-        let to_shift = copy.iter().rev().take(amount).collect::<Vec<&char>>();
+        let to_shift_iter = copy.iter().rev().take(amount);
+        let to_shift = if retain_order {
+            to_shift_iter.rev().collect::<Vec<&char>>()
+        } else {
+            to_shift_iter.collect::<Vec<&char>>()
+        };
         let old_from_length = stacks[from].len();
         for char in to_shift {
             stacks[to].push(*char);
