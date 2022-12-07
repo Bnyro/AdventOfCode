@@ -6,8 +6,8 @@ pub fn part_one() -> String {
         .map(|lines| {
             lines
                 .lines()
-                .map(|str| str.parse::<i32>().unwrap())
-                .sum::<i32>()
+                .map(|str| str.parse::<u32>().unwrap())
+                .sum::<u32>()
         })
         .max()
         .unwrap()
@@ -20,11 +20,11 @@ pub fn part_two() -> String {
         .map(|lines| {
             lines
                 .lines()
-                .map(|str| str.parse::<i32>().unwrap())
-                .sum::<i32>()
+                .map(|str| str.parse::<u32>().unwrap())
+                .sum::<u32>()
         })
-        .collect::<Vec<i32>>();
+        .collect::<Vec<u32>>();
     elves.sort();
     elves.reverse();
-    elves[0..3].to_vec().iter().sum::<i32>().to_string()
+    elves[0..3].to_vec().iter().sum::<u32>().to_string()
 }

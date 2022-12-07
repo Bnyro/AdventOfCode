@@ -2,7 +2,7 @@ use crate::util::read_file;
 
 pub fn part_one() -> String {
     let file = read_file(2);
-    let mut score: i32 = 0;
+    let mut score: u32 = 0;
     for battle in file.lines() {
         let opponent_shape = battle.chars().nth(0).unwrap().to_string();
         let own_shape = battle.chars().nth(2).unwrap().to_string();
@@ -31,11 +31,11 @@ pub fn part_two() -> String {
             let elf_hint = line.chars().nth(2).unwrap();
             get_score(opponent_choice, elf_hint)
         })
-        .sum::<i32>()
+        .sum::<u32>()
         .to_string()
 }
 
-fn get_value(choice: &str) -> i32 {
+fn get_value(choice: &str) -> u32 {
     match choice {
         "X" | "A" => 1,
         "Y" | "B" => 2,
@@ -43,10 +43,10 @@ fn get_value(choice: &str) -> i32 {
     }
 }
 
-fn get_score(opponent_choice: char, elf_hint: char) -> i32 {
+fn get_score(opponent_choice: char, elf_hint: char) -> u32 {
     let opp_choice = opponent_choice.to_string();
     let own_choice;
-    let score: i32 = match elf_hint.to_string().as_str() {
+    let score: u32 = match elf_hint.to_string().as_str() {
         "Y" => {
             own_choice = opp_choice.as_str();
             3
