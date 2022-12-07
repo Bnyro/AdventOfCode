@@ -2,13 +2,9 @@ use crate::util::read_file;
 
 pub fn part_one() -> String {
     let content = read_file(4);
-    // assert_eq!(get_range("10-20"), 10..21);
-    // assert!(get_range("10-20").contains(&10));
     let mut count = 0;
     for line in content.lines() {
-        let pairs = line.split(",").collect::<Vec<&str>>();
-        let first_range = get_range(pairs[0]);
-        let second_range = get_range(pairs[1]);
+        let (first_range, second_range) = get_parts(line);
         if (first_range.0 >= second_range.0 && first_range.1 <= second_range.1)
             || (second_range.0 >= first_range.0 && second_range.1 <= first_range.1)
         {
@@ -16,6 +12,31 @@ pub fn part_one() -> String {
         }
     }
     count.to_string()
+}
+
+pub fn part_two() -> String {
+    let content = read_file(4);
+    let mut count = 0;
+    for line in content.lines() {
+        let (first_range, second_range) = get_parts(line);
+        let first = first_range.0..first_range.1 + 1;
+        let second = second_range.0..second_range.1 + 1;
+        if !first
+            .filter(|u| second.contains(&u))
+            .collect::<Vec<u32>>()
+            .is_empty()
+        {
+            count = count + 1;
+        }
+    }
+    count.to_string()
+}
+
+fn get_parts(line: &str) -> ((u32, u32), (u32, u32)) {
+    let pairs = line.split(",").collect::<Vec<&str>>();
+    let first_range = get_range(pairs[0]);
+    let second_range = get_range(pairs[1]);
+    (first_range, second_range)
 }
 
 fn get_range(split: &str) -> (u32, u32) {
