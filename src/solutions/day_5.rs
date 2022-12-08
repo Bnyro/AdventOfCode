@@ -66,9 +66,5 @@ fn solve(retain_order: bool) -> String {
     }
 
     // return the top item for each column
-    stacks
-        .iter()
-        .map(|column| column.last().unwrap().to_string())
-        .collect::<Vec<String>>()
-        .join("")
+    stacks.iter().map(|column| column.last().unwrap()).collect()
 }
