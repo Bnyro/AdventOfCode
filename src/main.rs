@@ -23,6 +23,6 @@ fn main() {
     println!("7) 1: {}", solutions::day_7::part_one());
     println!("7) 2: {}", solutions::day_7::part_two());
 
-    // println!("8) 1: {}", solutions::day_8::part_one());
+    println!("8) 1: {}", solutions::day_8::part_one());
     // println!("8) 2: {}", solutions::day_8::part_two());
 }
