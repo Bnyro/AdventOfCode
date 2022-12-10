@@ -2,14 +2,14 @@ use std::{collections::HashSet};
 
 use crate::util::read_file;
 
-pub fn part_one() -> usize {
+pub fn part_one() -> String {
     let actions = &get_actions();
-    move_rope(actions, 1)
+    move_rope(actions, 1).to_string()
 }
 
-pub fn part_two() -> usize {
+pub fn part_two() -> String {
     let actions = &get_actions();
-    move_rope(actions, 9)
+    move_rope(actions, 9).to_string()
 }
 
 type Action = (i16, i16, i16);
