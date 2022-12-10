@@ -28,4 +28,7 @@ fn main() {
 
     println!("9) 1: {}", solutions::day_9::part_one());
     println!("9) 2: {}", solutions::day_9::part_two());
+
+    println!("10) 1: {}", solutions::day_10::part_one());
+    println!("10) 2: {}", solutions::day_10::part_two());
 }
