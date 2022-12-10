@@ -1,32 +1,44 @@
 use crate::util::read_file;
 
-pub fn part_one() -> String {
+fn solve() -> (i16, String) {
     let input = read_file(10);
-    let control_points: [i32; 6] = [20, 60, 100, 140, 180, 220];
 
-    let mut current_cycle = 1;
-    let mut current_value = 1;
-    let mut sum = 0;
+    let instructions: Vec<(i16, i16)> = input
+        .lines()
+        .map(|l| match l.split_once(' ').unwrap_or((l, "")) {
+            ("noop", _) => (1, 0),
+            ("addx", n) => (2, n.parse().unwrap()),
+            _ => unreachable!(),
+        })
+        .collect();
 
-    for line in input.lines() {
-        if control_points.contains(&current_cycle) {
-            sum = sum + current_cycle * current_value;
-        }
-        if line == "noop" {
-            current_cycle = current_cycle + 1;
-            continue;
-        }
+    let (_, _, part1, part2) = instructions.into_iter().fold(
+        (1, 0, 0, String::with_capacity(40 * 6)),
+        |(v, mut c, mut p1, mut p2), (cycles, amount)| {
+            (0..cycles).for_each(|_| {
+                let is_visible = (c as i16 % 40).abs_diff(v) <= 1;
 
-        if control_points.contains(&(current_cycle + 1)) {
-            sum = sum + (current_cycle + 1) * current_value;
-        }
-        let num = line.split_whitespace().last().unwrap().parse::<i32>().unwrap();
-        current_value = current_value + num;
-        current_cycle = current_cycle + 2;
-    }
-    sum.to_string()
+                c += 1;
+
+                p1 += (c % 40 == 20) as i16 * c * v;
+                p2.push(if is_visible { '#' } else { '.' });
+
+                if c % 40 == 0 {
+                    p2.push('\n');
+                }
+            });
+
+            (v + amount, c, p1, p2)
+        },
+    );
+
+    (part1, part2)
+}
+
+pub fn part_one() -> String {
+    solve().0.to_string()
 }
 
 pub fn part_two() -> String {
-    "".to_string()
+    solve().1
 }
